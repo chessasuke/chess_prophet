@@ -1,0 +1,22 @@
+{ "@@locale": "es",
+  "title": "Chess Prophet",
+  "@title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "Conócenos",
+  "@about": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "normCalc": "Calculadora de Norma",
+  "@normCalc": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ratingCalc": "Calculadora de Elo",
+  "@ratingCalc": {
+    "type": "text",
+    "placeholders": {}
+  }
+}
