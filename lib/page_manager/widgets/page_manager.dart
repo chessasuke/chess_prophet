@@ -1,17 +1,21 @@
 import 'package:chess_prophet/common/constants/app_colors.dart';
 import 'package:chess_prophet/common/constants/display_properties.dart';
 import 'package:chess_prophet/common/utils/extensions.dart';
+import 'package:chess_prophet/common/utils/utils.dart';
 import 'package:chess_prophet/page_manager/models/app_page.dart';
+import 'package:chess_prophet/services/analytics/events/actions_events.dart';
+import 'package:chess_prophet/services/analytics/models/event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PageManager extends StatefulWidget {
+class PageManager extends ConsumerStatefulWidget {
   const PageManager({Key? key}) : super(key: key);
 
   @override
-  State<PageManager> createState() => _PageManagerState();
+  ConsumerState<PageManager> createState() => _PageManagerState();
 }
 
-class _PageManagerState extends State<PageManager> {
+class _PageManagerState extends ConsumerState<PageManager> {
   late int _selectedIndex;
   late PageController pageController;
   late double bottomViewPadding;
@@ -55,13 +59,26 @@ class _PageManagerState extends State<PageManager> {
           currentIndex: _selectedIndex,
           selectedItemColor: AppColors.pink,
           unselectedItemColor: AppColors.grayNeutral300,
-          onTap: _onItemTapped,
+          onTap: (index) => _onItemTapped(index, ref),
         ),
       ),
     );
   }
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index, WidgetRef ref) {
+    
+    if (index == 1) {
+      Utils.trackEvent(
+        event: Event(name: ActionsEvents.goRatingTab.name),
+        ref: ref,
+      );
+    } else if (index == 2) {
+      Utils.trackEvent(
+        event: Event(name: ActionsEvents.goNormTab.name),
+        ref: ref,
+      );
+    }
+
     setState(() {
       _selectedIndex = index;
       pageController.animateToPage(_selectedIndex,

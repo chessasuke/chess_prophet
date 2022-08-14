@@ -18,11 +18,6 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  // SystemChrome.setEnabledSystemUIMode(
-  //   SystemUiMode.manual,
-  //   overlays: [SystemUiOverlay.top],
-  // );
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
   if (!kIsWeb) {

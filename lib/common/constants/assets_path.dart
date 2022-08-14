@@ -1,3 +1,3 @@
 class AssetPath {
-  static const profileImg = 'images/me.jpeg';
+  static const icLogo = 'assets/ic_logo.svg';
 }

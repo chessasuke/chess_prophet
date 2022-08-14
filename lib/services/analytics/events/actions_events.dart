@@ -1,3 +1,4 @@
 enum ActionsEvents {
-  startGame,
+  goRatingTab,
+  goNormTab,
 }

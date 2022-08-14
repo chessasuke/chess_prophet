@@ -1,4 +1,4 @@
-package com.example.chess_prophet
+package com.chessiando.chess_prophet
 
 import io.flutter.embedding.android.FlutterActivity
 

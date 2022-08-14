@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,35 +49,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDHZJmLOcJj2FORgR6EwqJYBPq20SFwEZU',
-    appId: '1:1003398199249:web:e047962c64b86a5b2052f0',
-    messagingSenderId: '1003398199249',
-    projectId: 'testing-b89bd',
-    authDomain: 'testing-b89bd.firebaseapp.com',
-    databaseURL: 'https://testing-b89bd-default-rtdb.firebaseio.com',
-    storageBucket: 'testing-b89bd.appspot.com',
-    measurementId: 'G-QV221MDMDB',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC4jqMK9gQL92og2YPBmkgYLpAXsdxc4xI',
-    appId: '1:1003398199249:android:1f725e2ba14c46f22052f0',
-    messagingSenderId: '1003398199249',
-    projectId: 'testing-b89bd',
-    databaseURL: 'https://testing-b89bd-default-rtdb.firebaseio.com',
-    storageBucket: 'testing-b89bd.appspot.com',
+    apiKey: 'AIzaSyBp-LKVWz54crpAs0Bhr94Vi5va3JgWcrA',
+    appId: '1:775763966659:android:d73ca2da0c9a1eca364076',
+    messagingSenderId: '775763966659',
+    projectId: 'chess-prophet',
+    storageBucket: 'chess-prophet.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC7Q8WSi7BXxvHDLM2w8ZBK35Z5Gk81U9U',
-    appId: '1:1003398199249:ios:2769e485885fe6d42052f0',
-    messagingSenderId: '1003398199249',
-    projectId: 'testing-b89bd',
-    databaseURL: 'https://testing-b89bd-default-rtdb.firebaseio.com',
-    storageBucket: 'testing-b89bd.appspot.com',
-    androidClientId: '1003398199249-rt1mjttkbvd43a8hntdaofh7agrbborg.apps.googleusercontent.com',
-    iosClientId: '1003398199249-98ojvud8r2gb9dsn4k5hhs77rm91erhb.apps.googleusercontent.com',
-    iosBundleId: 'com.example.starterKit',
+    apiKey: 'AIzaSyCGIUkm5vuamz-bfijLE5lARWEAnNBcziQ',
+    appId: '1:775763966659:ios:56c75a4f0e4c732a364076',
+    messagingSenderId: '775763966659',
+    projectId: 'chess-prophet',
+    storageBucket: 'chess-prophet.appspot.com',
+    iosClientId: '775763966659-7pdpo0nqqoqd89t7b6dktsunvjh5qn16.apps.googleusercontent.com',
+    iosBundleId: 'com.example.chessProphet',
   );
 }
