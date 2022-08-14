@@ -141,7 +141,7 @@ class _Header extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.only(top: DisplayProperties.mainTopPadding),
-      child: SvgPicture.asset(AssetPath.icLogo),
+      child: SvgPicture.asset(AssetPath.icLogoSvg),
     );
   }
 }
