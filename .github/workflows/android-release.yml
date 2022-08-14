@@ -1,0 +1,69 @@
+name: Android Release
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.0.5'
+          channel: 'stable'
+
+      - name: Download Android keystore
+        id: android_keystore
+        uses: timheuer/base64-to-file@v1.0.3
+        with:
+          fileName: key.jks
+          encodedString: ${{ secrets.KEYSTORE }}
+
+      - name: Create key.properties
+        run: |
+          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
+          echo "storePassword=${{ secrets.SIGNING_STORE_PASSWORD }}" >> android/key.properties
+          echo "keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}" >> android/key.properties
+
+      - name: Build Android App Bundle
+        run: flutter build appbundle
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: appbundle
+          path: build/app/outputs/bundle/release
+
+  release:
+    name: Release app to Google Play
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Get appbundle from artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: appbundle
+
+    - name: Release app to production
+      uses: r0adkll/upload-google-play@v1.0.17
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
+        packageName: com.chessasuke.score_keeper
+        releaseFile: app-release.aab
+        # whatsNewDirectory: distribution/whatsnew # changelogs should be in the format whatsnew-en-US
+
