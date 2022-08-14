@@ -24,14 +24,15 @@ class NormResult extends ConsumerWidget {
     final games = ref.watch(normGamesProvider);
     final normLevel = ref.watch(normLevelProvider);
 
-    final avg = _getAvg(opponents: opponents, userScore: userScore, normLevel: normLevel);
+    final avg = _getAvg(
+        opponents: opponents, userScore: userScore, normLevel: normLevel);
     final Rp = _getRp(opponents: opponents, userScore: userScore);
 
     final pointsAndAvgMap = _getNormFidePointsAndAvgMap(games);
 
     return Container(
       constraints:
-          const BoxConstraints(minHeight: DisplayProperties.normResultHeight),
+          const BoxConstraints(minHeight: DisplayProperties.pageResultHeight),
       decoration: BoxDecoration(
         color: AppColors.grayNeutral200,
         borderRadius: BorderRadius.circular(

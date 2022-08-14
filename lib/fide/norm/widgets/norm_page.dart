@@ -73,11 +73,10 @@ class _RatingScreenState extends ConsumerState<NormPage> {
   /// screen height minus all components except opponent list
   double _calculateOpponentListHeight(Size screenSize) =>
       screenSize.height -
-      (DisplayProperties.mainTopPadding +
-          DisplayProperties.mainBottomPadding +
+      (DisplayProperties.mainBottomPadding * 2 +
           DisplayProperties.bottomNavigationBarHeight +
           (DisplayProperties.componentsHeight * 3) +
-          DisplayProperties.normResultHeight +
+          DisplayProperties.pageResultHeight +
           (DisplayProperties.defaultContentPadding));
 
   @override

@@ -42,7 +42,6 @@ class _RatingScreenState extends ConsumerState<RatingPage> {
           padding: DisplayProperties.pagesPadding,
           child: Column(
             children: [
-              const SizedBox(height: DisplayProperties.defaultContentPadding),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: const [
@@ -76,11 +75,9 @@ class _RatingScreenState extends ConsumerState<RatingPage> {
   /// screen height minus all components except opponent list
   double _calculateOpponentListHeight(Size screenSize) =>
       screenSize.height -
-      (DisplayProperties.mainTopPadding +
-          DisplayProperties.mainBottomPadding +
-          DisplayProperties.bottomNavigationBarHeight +
+      (DisplayProperties.mainBottomPadding * 2 +
           (DisplayProperties.componentsHeight * 4) +
-          (DisplayProperties.defaultContentPadding * 4));
+          (DisplayProperties.defaultContentPadding * 3));
 
   @override
   void dispose() {

@@ -14,8 +14,6 @@ import 'navigator/route_parser.dart';
 import 'navigator/router_delegate.dart';
 
 void main() async {
-  // debugPrintGestureArenaDiagnostics = true;
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);

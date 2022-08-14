@@ -8,7 +8,7 @@ class DisplayProperties {
   static const double defaultContentPadding = 16.0;
   static const double mainHorizontalPadding = 20.0;
   static const double mainBottomPadding = 48.0;
-  static const double mainTopPadding = 24.0;
+  static const double mainTopPadding = 32.0;
   static const double defaultBorderRadius = 8.0;
 
   static const double iconSize = 35.0;
@@ -18,7 +18,7 @@ class DisplayProperties {
   static const double componentsHeight = 65;
   static const double componentBorderWidth = 0.5;
 
-  static const double normResultHeight = 150;
+  static const double pageResultHeight = 150;
 
   static const double textFieldWidth = 175;
   static final OutlineInputBorder focusedBorder = OutlineInputBorder(
@@ -54,7 +54,7 @@ class DisplayProperties {
   );
 
   static final pagesPadding = const EdgeInsets.only(
-    top: DisplayProperties.mainTopPadding,
+    top: DisplayProperties.mainBottomPadding,
     bottom: DisplayProperties.mainBottomPadding,
   ).add(const EdgeInsets.symmetric(
       horizontal: DisplayProperties.mainHorizontalPadding));

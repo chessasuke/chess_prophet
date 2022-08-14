@@ -22,44 +22,49 @@ class ResultRating extends ConsumerWidget {
     final kFactor = ref.watch(kFactorProvider);
 
     return Container(
-      height: DisplayProperties.componentsHeight,
+      // height: DisplayProperties.componentsHeight,
+      constraints: const BoxConstraints(minHeight: DisplayProperties.componentsHeight, maxHeight: DisplayProperties.pageResultHeight),
       decoration: BoxDecoration(
-          color: AppColors.grayNeutral200,
-          borderRadius: BorderRadius.circular(
-            DisplayProperties.defaultBorderRadius,
-          )),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          userRating == null
-              ? InitialRatingText(
-                  initialRating: _getRatingChange(
-                    opponents: opponents,
+        color: AppColors.grayNeutral200,
+        borderRadius: BorderRadius.circular(
+          DisplayProperties.defaultBorderRadius,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(DisplayProperties.defaultContentPadding),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            userRating == null
+                ? InitialRatingText(
+                    initialRating: _getRatingChange(
+                      opponents: opponents,
+                      userRating: userRating,
+                      kFactor: kFactor,
+                      userScore: userScore,
+                      isInitialRating: true,
+                    ),
+                  )
+                : RatingChangeText(
                     userRating: userRating,
-                    kFactor: kFactor,
-                    userScore: userScore,
-                    isInitialRating: true,
+                    ratingChange: _getRatingChange(
+                      opponents: opponents,
+                      userRating: userRating,
+                      kFactor: kFactor,
+                      userScore: userScore,
+                      isInitialRating: false,
+                    ),
                   ),
-                )
-              : RatingChangeText(
-                  userRating: userRating,
-                  ratingChange: _getRatingChange(
-                    opponents: opponents,
-                    userRating: userRating,
-                    kFactor: kFactor,
-                    userScore: userScore,
-                    isInitialRating: false,
-                  ),
-                ),
-          AverageAndExpectancy(
-            avg: _getAvg(opponents),
-            exp: _getExp(
-              opponents: opponents,
-              userRating: userRating,
+            AverageAndExpectancy(
+              avg: _getAvg(opponents),
+              exp: _getExp(
+                opponents: opponents,
+                userRating: userRating,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

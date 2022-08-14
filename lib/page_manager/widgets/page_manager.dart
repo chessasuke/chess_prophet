@@ -35,6 +35,7 @@ class _PageManagerState extends ConsumerState<PageManager> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white100,
       resizeToAvoidBottomInset: false,
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),

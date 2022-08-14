@@ -3,21 +3,9 @@ import 'package:chess_prophet/common/constants/remote_config_values.dart';
 import 'package:chess_prophet/common/text/text_style.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget{
   const HomePage({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late Size screenSize;
-
-  @override
-  void didChangeDependencies() {
-    screenSize = MediaQuery.of(context).size;
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
