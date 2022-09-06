@@ -1,7 +1,7 @@
-import 'package:chess_prophet/common/constants/app_colors.dart';
 import 'package:chess_prophet/common/constants/display_properties.dart';
 import 'package:chess_prophet/common/text/text_style.dart';
 import 'package:chess_prophet/common/widgets/basic_text_field.dart';
+import 'package:chess_prophet/fide/rating/rating_providers/opponents_rating_provider.dart';
 import 'package:chess_prophet/fide/rating/rating_providers/rating_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +22,7 @@ class AddOpponentRating extends ConsumerWidget {
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       textInputType: TextInputType.number,
       onChanged: (value) => _onChanged(ref, value),
+      onSubmitted: (value) => _onSubmitted(ref, value),
       style: TextStyles.heading03,
       labelText: 'Add Opponent',
     );
@@ -34,6 +35,17 @@ class AddOpponentRating extends ConsumerWidget {
         ref.read(opponentRatingToAddProvider.notifier).state =
             newOpponentRating;
       }
+    }
+  }
+
+  void _onSubmitted(WidgetRef ref, String value) {
+        final newOpponentRating =
+        ref.read(opponentRatingToAddProvider.notifier).state;
+    if (newOpponentRating != null && newOpponentRating > 0) {
+      ref.read(opponentsRatingProvider.notifier).add(newOpponentRating);
+      ref.read(opponentRatingToAddProvider.notifier).state = null;
+    } else {
+      print('show snackbar error');
     }
   }
 }

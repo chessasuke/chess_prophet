@@ -13,6 +13,7 @@ this.height,
     this.initialValue,
     this.labelText,
     this.onChanged,
+    this.onSubmitted,
     this.autoFocus = true,
     this.textInputType = TextInputType.text,
     this.style,
@@ -26,6 +27,7 @@ this.height,
   final double? height;
   final String? initialValue;
   final Function(String)? onChanged;
+    final Function(String)? onSubmitted;
   final String? labelText;
   final TextInputType textInputType;
   final TextStyle? style;
@@ -81,6 +83,7 @@ class _EditorTextInputState extends State<BasicTextField> {
         focusNode: _focus,
         controller: _controller,
         onChanged: widget.onChanged,
+        onSubmitted: widget.onSubmitted,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:chess_prophet/common/constants/app_colors.dart';
 import 'package:chess_prophet/common/constants/display_properties.dart';
+import 'package:chess_prophet/common/text/text_style.dart';
 import 'package:chess_prophet/common/utils/utils.dart';
 import 'package:chess_prophet/fide/models/k_factor.dart';
 import 'package:chess_prophet/fide/models/opponent_rating.dart';
@@ -22,8 +23,10 @@ class ResultRating extends ConsumerWidget {
     final kFactor = ref.watch(kFactorProvider);
 
     return Container(
-      // height: DisplayProperties.componentsHeight,
-      constraints: const BoxConstraints(minHeight: DisplayProperties.componentsHeight, maxHeight: DisplayProperties.pageResultHeight),
+      constraints: const BoxConstraints(
+        minHeight: DisplayProperties.componentsHeight,
+        maxHeight: DisplayProperties.pageResultHeight,
+      ),
       decoration: BoxDecoration(
         color: AppColors.grayNeutral200,
         borderRadius: BorderRadius.circular(
@@ -33,11 +36,11 @@ class ResultRating extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.all(DisplayProperties.defaultContentPadding),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             userRating == null
-                ? InitialRatingText(
+                ? _InitialRatingText(
                     initialRating: _getRatingChange(
                       opponents: opponents,
                       userRating: userRating,
@@ -98,17 +101,17 @@ class ResultRating extends ConsumerWidget {
     required double? userScore,
     required bool isInitialRating,
   }) {
-    bool _canCalculateRatingChange() =>
+    bool canCalculateRatingChange() =>
         opponents.isNotEmpty &&
         userRating != null &&
         kFactor != null &&
         userScore != null;
 
-    bool _canCalculateInitialRating() =>
+    bool canCalculateInitialRating() =>
         opponents.isNotEmpty && userScore != null;
 
     if (!isInitialRating) {
-      if (_canCalculateRatingChange()) {
+      if (canCalculateRatingChange()) {
         final opponentsRating = opponents.map((e) => e.rating).toList();
         return FideUtils.calculateRatingChange(
           ratingOfOpponents: opponentsRating,
@@ -119,7 +122,7 @@ class ResultRating extends ConsumerWidget {
       }
       return null;
     } else {
-      if (_canCalculateInitialRating()) {
+      if (canCalculateInitialRating()) {
         final opponentsRating = opponents.map((e) => e.rating).toList();
         return FideUtils.calculateIntialRating(
           ratingOfOpponents: opponentsRating,
@@ -128,5 +131,37 @@ class ResultRating extends ConsumerWidget {
       }
       return null;
     }
+  }
+}
+class _InitialRatingText extends StatelessWidget {
+  const _InitialRatingText({
+    required this.initialRating,
+    Key? key,
+  }) : super(key: key);
+
+  final double? initialRating;
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      flex: 2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: DisplayProperties.defaultContentPadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (initialRating != null && initialRating != 0)
+              Text(
+                '${initialRating!.round()}',
+                style: TextStyles.heading02,
+              )
+            else
+              const SizedBox(),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -37,6 +37,7 @@ class AddOpponentRatingBtn extends ConsumerWidget {
         ref.read(opponentRatingToAddProvider.notifier).state;
     if (newOpponentRating != null && newOpponentRating > 0) {
       ref.read(opponentsRatingProvider.notifier).add(newOpponentRating);
+      ref.read(opponentRatingToAddProvider.notifier).state = null;
       // if (scrollController.hasClients) {
       //   scrollController.animateTo(
       //     scrollController.position.maxScrollExtent +

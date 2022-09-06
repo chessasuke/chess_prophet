@@ -20,25 +20,28 @@ class AverageAndExpectancy extends ConsumerWidget {
 
     return Flexible(
       flex: 2,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: DisplayProperties.defaultContentPadding),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-             if (avg != null)
-            AppTooltipWidget(
-              text: 'Avg  ${avg ?? ""}',
-              message: 'Average Rating of Opponents',
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          if (avg != null)
+            Padding(
+              padding: const EdgeInsets.all(
+                  DisplayProperties.defaultContentPadding / 2),
+              child: AppTooltipWidget(
+                text: 'Avg  ${avg ?? ""}',
+                message: 'Average Rating of Opponents',
+              ),
             ),
-            if(userRating != null && exp != null)
-            AppTooltipWidget(
-              text: 'Exp  ${exp ?? ""}',
-              message: 'Score Expectancy',
+          if (userRating != null && exp != null)
+            Padding(
+              padding: const EdgeInsets.all(
+                  DisplayProperties.defaultContentPadding / 2),
+              child: AppTooltipWidget(
+                text: 'Exp  ${exp ?? ""}',
+                message: 'Score Expectancy',
+              ),
             ),
-          ],
-        ),
+        ],
       ),
     );
   }

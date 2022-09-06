@@ -74,36 +74,3 @@ class RatingChangeText extends StatelessWidget {
     }
   }
 }
-
-class InitialRatingText extends StatelessWidget {
-  const InitialRatingText({
-    required this.initialRating,
-    Key? key,
-  }) : super(key: key);
-
-  final double? initialRating;
-
-  @override
-  Widget build(BuildContext context) {
-    return Flexible(
-      flex: 2,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: DisplayProperties.defaultContentPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (initialRating != null && initialRating != 0)
-              Text(
-                '${initialRating!.round()}',
-                style: TextStyles.heading02,
-              )
-            else
-              const SizedBox(),
-          ],
-        ),
-      ),
-    );
-  }
-}
